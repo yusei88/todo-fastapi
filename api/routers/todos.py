@@ -1,26 +1,50 @@
-from fastapi import APIRouter
 from typing import List
+from datetime import datetime
 
-from api.schemas.response_todo import ResponseToDo
+from fastapi import APIRouter
+
+import schemas.response_todo as todo_schema
 
 router = APIRouter()
 
 
-@router.get("/todos", response_model=List[ResponseToDo])
+@router.get("/todos", response_model=List[todo_schema.ResponseToDo])
 async def get_tasks():
-    return [ResponseToDo(todo_id=1, title="1つ目")]
+    return [
+        todo_schema.ResponseToDo(
+            todo_id=1,
+            title="1つ目",
+            finished=False,
+            due_date=datetime.now
+        )
+    ]
 
 
-@router.post("/todos", response_model=ResponseToDo)
+@router.post("/todos", response_model=todo_schema.ResponseToDo)
 async def post_task():
-    ResponseToDo(todo_id=1, title="1つ目")
+    return todo_schema.ResponseToDo(
+        todo_id=1,
+        title="1つ目",
+        finished=False,
+        due_date=datetime.now
+    )
 
 
-@router.put("/todos", response_model=ResponseToDo)
+@router.put("/todos", response_model=todo_schema.ResponseToDo)
 async def put_task():
-    ResponseToDo(todo_id=1, title="1つ目")
+    return todo_schema.ResponseToDo(
+        todo_id=1,
+        title="1つ目",
+        finished=False,
+        due_date=datetime.now
+    )
 
 
-@router.delete("/todos", response_model=ResponseToDo)
+@router.delete("/todos", response_model=todo_schema.ResponseToDo)
 async def delete_task():
-    ResponseToDo(todo_id=1, title="1つ目")
+    return todo_schema.ResponseToDo(
+        todo_id=1,
+        title="1つ目",
+        finished=False,
+        due_date=datetime.now
+    )
